@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<h3 class="text-success text-center fs-2 text mt-3">Apply For Leave</h3>
+<form class="ms-5 me-5 p-5 ">
+    <div class="mb-3 row">
+        <label for="floatingSelect" class="col-sm-2 col-form-label">Leave Type</label>
+        <div class="col-sm-10">
+            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                <option selected>Select leave type</option>
+                <option value="1">Annual</option>
+                <option value="2">Casual</option>
+                <option value="3">Sick</option>
+              </select>
+        </div>   
+    </div>
+    <div class="mb-3 row">
+        <label for="inputStartDate" class="col-sm-2 col-form-label">Start Date</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="inputStartDate">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="inputEndDate" class="col-sm-2 col-form-label">End Date</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="inputEndDate">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <div class="col-sm-2 col-form-label"></div>
+        <div class="col-sm-10">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label ms-3" for="flexCheckDefault">
+                Half Day
+            </label>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="exampleInputReason" class="col-sm-2 col-form-label">Reason</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" placeholder="Leave a reason here" id="floatingTextarea"></textarea>
+        </div>
+    </div>
+    <div class="position-absolute start-50 translate-middle mt-5">
+        <button type="submit" class="btn btn-success ">Apply</button>
+    </div>
+</form>
