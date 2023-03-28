@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-employee.component.css']
 })
 export class AddEmployeeComponent {
+  menu1="Employee Details";
+  menu2="Leave Requests"
 
 }
