@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./apply-leave.component.css']
 })
 export class ApplyLeaveComponent {
+  menu1="Apply Leave";
 
 }
