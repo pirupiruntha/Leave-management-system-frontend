@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 const USER_KEY = 'auth-user';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +23,6 @@ export class StorageService {
     if (user) {
       return JSON.parse(user);
     }
-
     return {};
   }
 
