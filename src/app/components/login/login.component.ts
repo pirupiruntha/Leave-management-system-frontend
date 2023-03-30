@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginUser } from 'src/app/model/login-user';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -9,59 +9,53 @@ import { LoginUser } from 'src/app/model/login-user';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-  username : string = '';
-  password : string = '';
-  role : string = '';
-
-  user : LoginUser = new LoginUser();
-
-  roles : string[];
+  form: any = {
+    username: null,
+    password: null
+  };
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
 
   constructor(
     private authService: AuthService,
-    private route: Router
-  ) {
-    this.roles = [
-      'admin',
-      'user'
-    ]
-  }
+    private storageService: StorageService,
+    private route: Router,
+    
+  ) { }
 
   ngOnInit(): void {
-    this.username = '';
-    this.password = '';
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.roles = this.storageService.getUser().roles;
+    }
   }
 
-  login(){
-    this.user.username = this.username;
-    this.user.password = this.password;
-    this.user.role = this.role;
+  onSubmit(): void {
+    const {username, password } = this.form;
 
-    this.authService.login(this.user).subscribe(res => {
+    this.authService.login(username, password).subscribe({
+      next: data => {
+        this.storageService.saveUser(data);
 
-      if(res == null) {
-        alert("Uername or password is wrong");
-        this.ngOnInit();
-      }else {
-        alert("Login successful");
-        localStorage.setItem("token",res.token);
-        this.route.navigate(['/home'])
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.storageService.getUser().roles;
+        console.log("roles", this.roles[0])
 
-        // if(this.role == 'user') {
-        //   this.route.navigate(['/user']);
-        // } 
-
-        // if( this.role == 'admin') {
-        //   this.route.navigate(['/admin']);
-        // }
-
+        if (this.roles[0]==="ROLE_ADMIN"){
+          this.route.navigate(['/admin-navbar']);
+        } else {
+          this.route.navigate(['/home'])
+        }
+          
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
       }
-
-    }, err => {
-      alert("Login failed");
-      this.ngOnInit();
-    })
-
+    });
   }
   
 }
