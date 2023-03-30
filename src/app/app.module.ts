@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './components/user-navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { ApplyLeaveComponent } from './components/apply-leave/apply-leave.component';
 import { MyLeaveComponent } from './components/my-leave/my-leave.component';
@@ -17,6 +17,7 @@ import { EmployeeDetailsComponent } from './components/employee-details/employee
 import { LeaveRequestsComponent } from './components/leave-requests/leave-requests.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -34,7 +35,8 @@ export function tokenGetter() {
     EmployeeDetailsComponent,
     LeaveRequestsComponent,
     AddEmployeeComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminNavbarComponent
   ],
   imports: [
     BrowserModule,
