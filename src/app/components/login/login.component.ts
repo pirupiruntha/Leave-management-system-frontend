@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit{
     this.authService.login(username, password).subscribe({
       next: data => {
         this.storageService.saveUser(data);
+        console.log(data)
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
@@ -52,10 +53,14 @@ export class LoginComponent implements OnInit{
           
       },
       error: err => {
-        this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
     });
+  }
+
+  logout(){
+    this.route.navigate(['/login']);
+    this.storageService.clean();
   }
   
 }
