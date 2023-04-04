@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +15,9 @@ export class NavbarComponent implements OnInit {
   roles: string[] = [];
 
 
-  constructor(private authService: AuthService,  private storageService: StorageService ) {}
+  constructor(
+    private storageService: StorageService,
+    private route:Router ) {}
 
   ngOnInit() {
     if (this.storageService.isLoggedIn()) {
@@ -26,6 +28,11 @@ export class NavbarComponent implements OnInit {
   }
   changeNavbar(){
     localStorage.getItem("roles")
+  }
+
+  Logout(): void{
+    this.storageService.clean();
+    this.route.navigate([''])
   }
 
 }
