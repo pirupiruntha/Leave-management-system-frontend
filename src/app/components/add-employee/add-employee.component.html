@@ -2,36 +2,43 @@
 <div class="container-sm">
     <h3 class="text-success text-center fs-2 text mt-3">Add Employee Form</h3>
 
-    <form class="ms-5 me-5 p-5 ">
+    <form class="ms-5 me-5 p-5" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
 
         <div class="mb-3 row">
             <label for="floatingInputName" class="col-sm-2 col-form-label">Full Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="floatingInputName"/>
+                <input type="text" class="form-control" id="floatingInputName" formControlName="fullName"/>
             </div>   
         </div>
 
         <div class="mb-3 row">
             <label for="floatingInputEmpId" class="col-sm-2 col-form-label">Employee Id</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="floatingInputEmpId"/>
+                <input type="text" class="form-control" id="floatingInputEmpId" formControlName="employeeId"/>
             </div>   
         </div>
 
         <div class="mb-3 row">
             <label for="floatingInputEmail" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="floatingInputEmail"/>
+                <input type="email" class="form-control" id="floatingInputEmail" formControlName="email"/>
             </div>   
+        </div>
+
+        <div class="mb-3 row">
+            <label for="inputStartDate" class="col-sm-2 col-form-label">Birth Date</label>
+            <div class="col-sm-10">
+            <input type="date" class="form-control" id="inputStartDate" formControlName="dob">
+            </div>
         </div>
 
         <div class="mb-3 row">
             <label for="floatingSelect" class="col-sm-2 col-form-label">Gender</label>
             <div class="col-sm-10">
-                <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" formControlName="gender">
                     <option selected>Select Gender</option>
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
             </div>   
         </div>
@@ -39,47 +46,54 @@
         <div class="mb-3 row">
             <label for="floatingInputUsername" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="floatingInputUsername"/>
+                <input type="text" class="form-control" id="floatingInputUsername" formControlName="username"/>
             </div>   
         </div>
 
         <div class="mb-3 row">
             <label for="floatingInputPassword" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="floatingInputPassword"/>
+                <input type="text" class="form-control" id="floatingInputPassword" formControlName="password"/>
             </div>   
         </div>
 
         <div class="mb-3 row">
             <label for="floatingInputTeleNo" class="col-sm-2 col-form-label">Telephone No</label>
             <div class="col-sm-10">
-                <input type="tel" class="form-control" id="floatingInputTeleNo"/>
+                <input type="tel" class="form-control" id="floatingInputTeleNo" formControlName="telNo"/>
             </div>   
         </div>
 
         <div class="mb-3 row">
             <label for="inputStartDate" class="col-sm-2 col-form-label">Start Date</label>
             <div class="col-sm-10">
-            <input type="date" class="form-control" id="inputStartDate">
+            <input type="date" class="form-control" id="inputStartDate" formControlName="startDate">
             </div>
         </div>
 
         <div class="mb-3 row">
             <label for="floatingInputEducation" class="col-sm-2 col-form-label">Education</label>
             <div class="col-sm-10">
-                <input type="text"  class="form-control"  id="floatingInputEducation"/>
+                <input type="text"  class="form-control"  id="floatingInputEducation" formControlName="education"/>
             </div>
         </div>
 
         <div class="mb-3 row">
             <label for="floatingInputJobTitle" class="col-sm-2 col-form-label">Job Title</label>
             <div class="col-sm-10">
-                <input type="text"  class="form-control"  id="floatingInputJobTitle"/>
+                <input type="text"  class="form-control"  id="floatingInputJobTitle" formControlName="jobTitle"/>
             </div>
         </div>
 
+        <div class="mb-3 row">
+            <label for="floatingInputSalary" class="col-sm-2 col-form-label">Salary</label>
+            <div class="col-sm-10">
+                <input type="tel" class="form-control" id="floatingInputSalary" formControlName="salary"/>
+            </div>   
+        </div>
+
         <div class="position-absolute start-50 translate-middle mt-5">
-            <button type="submit" class="btn btn-success ">SUBMIT</button>
+            <button type="submit" class="btn btn-success " [disabled]="employeeForm.invalid">SUBMIT</button>
         </div>
     </form>
 </div>
