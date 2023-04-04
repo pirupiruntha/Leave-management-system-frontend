@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div class="container-fluid g-0 p-2 mt-5">
+<div class="container-fluid g-0 p-2 mt-5" >
 
     <div class="row g-0">
 
@@ -12,8 +12,8 @@
 
             <div class="row g-0">
 
-                <div class="col-md-10 text-center">
-                    <span class="name">Harish Kalyan Sundar</span>
+                <div class="col-md-10 text-center" >
+                    <span class="name">{{employee.fullName}}</span>
                 </div>
 
             </div>
@@ -28,18 +28,18 @@
                                 <td colspan="2">Personal Details</td>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             <tr>
                                 <td>Birthdate</td>
-                                <td>1994-10-06</td>
+                                <td>{{employee.dob}}</td>
                             </tr>
                             <tr>
                                 <td>Gender</td>
-                                <td>Male"</td>
+                                <td>{{employee.gender}} </td>
                             </tr>
                             <tr>
                                 <td>Education</td>
-                                <td>B.Sc (hons) in Software Engineering</td>
+                                <td>{{employee.education}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -54,18 +54,18 @@
                                 <td colspan="2">Job Details</td>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             <tr>
-                                <td>Company</td>
-                                <td>hSenid lanka</td>
+                                <td>Start Date</td>
+                                <td>{{employee.startDate}}</td>
                             </tr>
                             <tr>
-                                <td>Experience</td>
-                                <td>5 yrs</td>
+                                <td>Job Title</td>
+                                <td>{{employee.jobTitle}}</td>
                             </tr>
                             <tr>
                                 <td>Salary</td>
-                                <td>100000 LPA</td>
+                                <td>{{employee.salary}}</td>
                             </tr>
                         </tbody>
                     </table>
