@@ -1,15 +1,16 @@
-export class Employee {
-    empId!: string
-    dob!: Date
-    fullName!: string
-    email!: string
-    usernane!: string
-    password!: string
-    education!: string
-    gender!: string
-    employeeRole!: string
-    telephoneNo!: string
-    jobTitle!: string
-    salary!: DoubleRange
-    startDate!: Date
-}
+export interface Employee {
+    fullName: string;
+    empId?: string;
+    email: string;
+    dob: string;
+    gender: string;
+    username: string;
+    password: string;
+    telephoneNo: string;
+    startDate: string;
+    leaveAllowance: string;
+    education: string;
+    jobTitle: string;
+    salary: string;
+  }
+  
