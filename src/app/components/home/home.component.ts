@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Employee } from 'src/app/model/employee';
 import { EmployeeServiceService } from 'src/app/services/employee.service';
 
@@ -9,27 +8,44 @@ import { EmployeeServiceService } from 'src/app/services/employee.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public employees: any = [];
-  public employee:any;
-  public mainModel = new Employee();
+    fullName?: string;
+    dob?: string;
+    gender?: string;
+    startDate?: string;
+    education?: string;
+    jobTitle?: string;
+    salary?: string;
 
-  employeeForm = new FormGroup({
-    id: new FormControl('', Validators.required),
-    name: new FormControl('', Validators.required),
-    
-  });
+  private username: string = "";
 
   constructor(private employeeService :EmployeeServiceService){}
 
   ngOnInit(): void {
-    this.getEmployeeDataByUsername()
+    this.username = localStorage.getItem("USERNAME") || ""
+    console.log(this.username)
+    this.getEmployeeDataByUsername(this.username);
     
   }
 
-  getEmployeeDataByUsername(): void { 
-    this.employeeService 
-      .getEmployeeDataByUsername()
-      this.employee
+  getEmployeeDataByUsername(username: string): void { 
+    console.log("CALLING METHOD TO USER")
+    this.employeeService.getEmployeeDataByUsername(this.username).subscribe((data)=>{
+      console.log("data = ", data);
+      this.fullName = data.fullName;
+      this.dob = data.dob;
+      this.gender = data.gender;
+      this.education = data.education;
+      this.jobTitle = data.jobTitle;
+      this.startDate = data.startDate;
+      this.salary = data.salary;
+    })
   }
+  
+
+  // getEmployeeDataByUsername(): void { 
+  //   this.employeeService 
+  //     .getEmployeeDataByUsername()
+  //     this.employee
+  // }
 
 }
