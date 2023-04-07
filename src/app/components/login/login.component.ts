@@ -38,12 +38,14 @@ export class LoginComponent implements OnInit{
     this.authService.login(username, password).subscribe({
       next: data => {
         this.storageService.saveUser(data);
-        console.log(data)
+        console.log("auth user",data)
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
         console.log("roles", this.roles[0])
+
+        localStorage.setItem("USERNAME", username);
 
         if (this.roles[0]==="ROLE_ADMIN"){
           this.route.navigate(['/admin-navbar']);
