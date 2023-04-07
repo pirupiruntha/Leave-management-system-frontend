@@ -1,45 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-
+import { Employee } from 'src/app/model/employee';
+import { EmployeeServiceService } from 'src/app/services/employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.css']
 })
-export class AddEmployeeComponent {
-  
-  employeeForm = new FormGroup({
+export class AddEmployeeComponent implements OnInit {
 
+  employeeForm = new FormGroup({
     fullName: new FormControl(''),
-    employeeId: new FormControl(''),
+    empId: new FormControl(''),
     email: new FormControl(''),
     dob: new FormControl(''),
     gender: new FormControl(''),
     username: new FormControl(''),
     password: new FormControl(''),
-    telNo: new FormControl(''),
+    telephoneNo: new FormControl(''),
     startDate: new FormControl(''),
+    leaveAllowance: new FormControl(''),
     education: new FormControl(''),
     jobTitle: new FormControl(''),
     salary: new FormControl('')
   });
 
-  constructor(private http: HttpClient) {}
+  errorMessage: string ='';
+  successMessage: string ='';
 
-  onSubmit() {
-    const employeeData = this.employeeForm.value;
-    console.log(this.employeeForm.value);
-    this.http.post('http://localhost:8080/employees', employeeData).subscribe(response => {
-      console.log(response);
-    });
+  constructor(private employeeService: EmployeeServiceService, private router: Router) { }
+
+  ngOnInit(): void {
   }
 
-  // onSubmit() {
-  //   console.log(this.employeeForm.value);
-  //   this.employeeService.addEmployeeData(this.employeeForm.value).subscribe((response) => {
-  //     console.log(response);
-  //   });
-  // }
+  onSubmit() {
+    if (this.employeeForm.invalid) {
+      this.errorMessage = "Please fill out all required fields.";
+      return;
+    }
+  
+    const employee: Employee = this.employeeForm.value as Employee;
+    this.employeeService.addEmployee(employee).subscribe(
+      (response) => {
+        console.log("res = ", response);
+        alert("Employee added successfully!");
+        this.successMessage = "Employee added successfully!";
+        this.employeeForm.reset();
+        this.router.navigate(['/employeedetails']);
+      },
+      (error) => {
+        console.error(error);
+        this.errorMessage = "Failed to add employee. Please try again later.";
+      }
+    );
+  }
+
 }
+
