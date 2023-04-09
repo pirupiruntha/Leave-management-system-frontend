@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/model/employee';
 import { EmployeeServiceService } from 'src/app/services/employee.service';
 
 @Component({
@@ -24,7 +23,6 @@ export class HomeComponent implements OnInit {
     this.username = localStorage.getItem("USERNAME") || ""
     console.log(this.username)
     this.getEmployeeDataByUsername(this.username);
-    
   }
 
   getEmployeeDataByUsername(username: string): void { 
@@ -40,12 +38,4 @@ export class HomeComponent implements OnInit {
       this.salary = data.salary;
     })
   }
-  
-
-  // getEmployeeDataByUsername(): void { 
-  //   this.employeeService 
-  //     .getEmployeeDataByUsername()
-  //     this.employee
-  // }
-
 }
