@@ -19,6 +19,8 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { ProfileComponent } from './components/profile/profile.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -37,7 +39,9 @@ export function tokenGetter() {
     AddEmployeeComponent,
     ProfileComponent,
     AdminNavbarComponent,
-    FooterComponent
+    FooterComponent,
+    AdminDashboardComponent,
+    UserDashboardComponent,
   ],
   imports: [
     BrowserModule,
