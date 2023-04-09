@@ -9,8 +9,10 @@ export interface Employee {
     telephoneNo: string;
     startDate: string;
     leaveAllowance: string;
+    leaveBalance: string;
     education: string;
     jobTitle: string;
     salary: string;
+    roles?: string [];
   }
   
