@@ -1,87 +1,64 @@
 <app-admin-navbar></app-admin-navbar>
-<div class="container-fluid g-0 p-2">
 
-    <div class="row g-0">
-
-        <div class="col-md-2 d-flex justify-content-center align-items-center">
-            <img src="../../../assets/images/Profile-01.jpg" alt="Profile Image" class="profile">
+<h2 class="ms-5 text-success mt-3 text-center mb-3"> Employee Details </h2>
+<table class="table">
+    <thead class="justify-content-center align-items-center">
+      <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">Employee Name</th>
+        <th scope="col">Birthdate</th>
+        <th scope="col">Role</th>
+        <th scope="col">Job Title</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">More</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of allEmployeeData; let i = index" >
+        <td>{{ i + 1 }}</td>
+        <td>{{employee.fullName}} </td>
+        <td>{{employee.dob.split('T')[0]}}</td>
+        <td>{{employee.roles}} </td>
+        <td>{{employee.jobTitle}}</td>
+        <td>{{employee.startDate.split('T')[0]}}</td>
+        <td>
+            <div class="justify-content-center align-items-center">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" #viewModal (click)="openModal(i)">View</button>
+                    <button type="button" class="btn btn-outline-success" (click)="editEmployeeDetails(employee)">Edit</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="deleteEmployeeDetails()">Delete</button>
+                </div>
+            </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{allEmployeeData[currentIndex].fullName}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-
-        <div class="col ps-2">
-
-            <div class="row g-0">
-
-                <div class="col-md-10 text-center">
-                    <span class="name">Powsikan Kanthasamy</span>
-                </div>
-
-                <div class="col-md-2 d-flex justify-content-center align-items-center">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-outline-success">Edit</button>
-                        <button type="button" class="btn btn-outline-danger">Delete</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row g-0 mt-3">
-
-                <div class="col-md">
-
-                    <table class="table table-hover mx-auto">
-                        <thead class="text-center fs-5 fst-italic text-secondary">
-                            <tr>
-                                <td colspan="2">Personal Details</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Birthdate</td>
-                                <td>1996-11-06</td>
-                            </tr>
-                            <tr>
-                                <td>Gender</td>
-                                <td>Male"</td>
-                            </tr>
-                            <tr>
-                                <td>Education</td>
-                                <td>B.Sc (hons) in Software Engineering</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-
-                <div class="col">
-
-                    <table class="table table-hover mx-auto">
-                        <thead class="text-center fs-5 fst-italic text-secondary">
-                            <tr>
-                                <td colspan="2">Job Details</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Company</td>
-                                <td>hSenid lanka</td>
-                            </tr>
-                            <tr>
-                                <td>Experience</td>
-                                <td>5 yrs</td>
-                            </tr>
-                            <tr>
-                                <td>Salary</td>
-                                <td>100000 LPA</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-
-            </div>
+        <div class="modal-body">
+            <p><b> Name: </b> {{allEmployeeData[currentIndex].fullName}}</p>
+            <p><b> Employee Id: </b>{{allEmployeeData[currentIndex].empId}}</p>
+            <p><b> Birthdate: </b>{{allEmployeeData[currentIndex].dob.split('T')[0]}}</p>
+            <p><b> Role: </b> {{allEmployeeData[currentIndex].roles}}</p>
+            <p><b> Email: </b>{{allEmployeeData[currentIndex].email}}</p>
+            <p><b> Education: </b>{{allEmployeeData[currentIndex].education}}</p>
+            <p><b> Job Title: </b>{{allEmployeeData[currentIndex].jobTitle}}</p>
+            <p><b> Start Date: </b>{{allEmployeeData[currentIndex].startDate.split('T')[0]}}</p>
+            <p><b> Salary: </b>{{allEmployeeData[currentIndex].salary}}</p>
+            <p><b> Leave Allowance: </b>{{allEmployeeData[currentIndex].leaveAllowance}}</p>
+            <p><b> Leave Balance: </b>{{allEmployeeData[currentIndex].leaveBalance}}</p>
 
         </div>
-
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+        </div>
+      </div>
     </div>
-
-</div>
+  </div>
