@@ -1,48 +1,48 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Employee } from '../model/employee';
 import { Observable } from 'rxjs';
+import { StorageService } from './storage.service';
+import { LeaveRequest } from '../model/leave-request';
 
-const API_URL = "http://localhost:8080/employees"
 
 @Injectable({
   providedIn: 'root'
 })
-export class EmployeeServiceService implements OnInit {
+export class EmployeeServiceService  {
   public getEmployeeDetails: any;
-  
-  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getEmployeesData();
-    this.addEmployeeData();
-  }
-  public getEmployeesData(){
-    return this.http.get(API_URL);
-
-    // this.http.get(API_URL).subscribe((data) => {
-    //   console.log(data);
-    //   this.getEmployeeDetails= data;
-    // });
   }
 
-  public getEmployeeDataByUsername(){
-    return this.http.get(API_URL +`${'username'}`).subscribe((data) => {
-      console.log(data);
-      this.getEmployeeDetails= data;
-    });
-  }
-
-
-  public addEmployeeData(){
-    return this.http.post(API_URL, Employee);
-
-    // this.http.post(API_URL, Employee).subscribe((data) => {
-    //   console.log(data);
-    // })
-  }
-
+  private baseUrl = "http://localhost:8080/"
   
+  constructor(private http: HttpClient, private storageService: StorageService) { }
 
+  private getAuthTokenHeader(): HttpHeaders {
+    const token = this.storageService.getUser().token;
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`).append('Access-Control-Allow-Origin',"*");  
+  }
 
+  addEmployee(employee: Employee): Observable<Employee> {
+    const headers = this.getAuthTokenHeader();
+    return this.http.post<Employee>(`${this.baseUrl}employees`, employee, { headers });
+  }
+
+  applyLeave(leaveRequest: LeaveRequest, username: string): Observable<LeaveRequest> {
+    const headers = this.getAuthTokenHeader();
+    return this.http.post<LeaveRequest>(`${this.baseUrl}employee/leave/${username}`, leaveRequest, { headers });
+  }
+
+  getAllEmployees(): Observable<Employee[]> {
+    const headers = this.getAuthTokenHeader();
+    return this.http.get<Employee[]>(`${this.baseUrl}employees`, { headers });
+    
+  }
+
+  getEmployeeDataByUsername(username: string): Observable<Employee> {
+    const headers = this.getAuthTokenHeader();
+    return this.http.get<Employee>(`${this.baseUrl}employees/${username}`, { headers });
+  }
+  
 }
