@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Employee } from 'src/app/model/employee';
 import { EmployeeServiceService } from 'src/app/services/employee.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-employee',
@@ -10,6 +10,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-employee.component.css']
 })
 export class AddEmployeeComponent implements OnInit {
+  existingEmployee: any ={};
+  showText= false;
+
+  constructor(private employeeService: EmployeeServiceService, private router: Router, private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    console.log("initialize");
+    this.route.queryParams.subscribe(params => {
+      if (params['employee']) {
+        this.existingEmployee = JSON.parse(params['employee']);
+        this.showText=true;
+      }
+    });
+    console.log("edit", this.existingEmployee)
+  }
 
   employeeForm = new FormGroup({
     fullName: new FormControl(''),
@@ -29,32 +44,43 @@ export class AddEmployeeComponent implements OnInit {
 
   errorMessage: string ='';
   successMessage: string ='';
-
-  constructor(private employeeService: EmployeeServiceService, private router: Router) { }
-
-  ngOnInit(): void {
-  }
-
+  
   onSubmit() {
     if (this.employeeForm.invalid) {
       this.errorMessage = "Please fill out all required fields.";
-      return;
+      return ;
     }
   
     const employee: Employee = this.employeeForm.value as Employee;
-    this.employeeService.addEmployee(employee).subscribe(
-      (response) => {
-        console.log("res = ", response);
-        alert("Employee added successfully!");
-        this.successMessage = "Employee added successfully!";
-        this.employeeForm.reset();
-        this.router.navigate(['/employeedetails']);
-      },
-      (error) => {
-        console.error(error);
-        this.errorMessage = "Failed to add employee. Please try again later.";
-      }
-    );
+    if(this.showText){
+      this.employeeService.updateEmployee(this.existingEmployee.username, employee).subscribe(
+        (response) => {
+          console.log("res = ", response);
+          alert("Employee update successfully!");
+          this.successMessage = "Employee update successfully!";
+          this.employeeForm.reset();
+          this.router.navigate(['/employeedetails']);
+        },
+        (error) => {
+          console.error(error);
+          this.errorMessage = "Failed to update employee. Please try again later.";
+        }
+      );
+    }else{
+      this.employeeService.addEmployee(employee).subscribe(
+        (response) => {
+          console.log("res = ", response);
+          alert("Employee added successfully!");
+          this.successMessage = "Employee added successfully!";
+          this.employeeForm.reset();
+          this.router.navigate(['/employeedetails']);
+        },
+        (error) => {
+          console.error(error);
+          this.errorMessage = "Failed to add employee. Please try again later.";
+        }
+      );
+    }
   }
 
 }
