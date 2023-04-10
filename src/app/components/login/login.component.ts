@@ -48,9 +48,9 @@ export class LoginComponent implements OnInit{
         localStorage.setItem("USERNAME", username);
 
         if (this.roles[0]==="ROLE_ADMIN"){
-          this.route.navigate(['/admin-navbar']);
+          this.route.navigate(['/adminDashboard']);
         } else {
-          this.route.navigate(['/home'])
+          this.route.navigate(['/userDashboard'])
         }
           
       },
