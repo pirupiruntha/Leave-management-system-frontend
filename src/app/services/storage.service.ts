@@ -26,12 +26,16 @@ export class StorageService {
     return {};
   }
 
+  public getToken(): string | null {
+    console.log("token = ", window.sessionStorage.getItem(USER_KEY));
+    return window.sessionStorage.getItem(USER_KEY);   
+  }
+
   public isLoggedIn(): boolean {
     const user = window.sessionStorage.getItem(USER_KEY);
     if (user) {
       return true;
     }
-
     return false;
   }
 }
