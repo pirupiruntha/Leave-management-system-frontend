@@ -20,6 +20,7 @@ const routes: Routes = [
   {path:"employeedetails", component:EmployeeDetailsComponent},
   {path:"leaveRequests", component:LeaveRequestsComponent},
   {path:"adminDashboard", component:AdminDashboardComponent},
+  {path:"home", component:UserDashboardComponent}
   
 ];
 
