@@ -27,7 +27,6 @@ export class StorageService {
   }
 
   public getToken(): string | null {
-    console.log("token = ", window.sessionStorage.getItem(USER_KEY));
     return window.sessionStorage.getItem(USER_KEY);   
   }
 
