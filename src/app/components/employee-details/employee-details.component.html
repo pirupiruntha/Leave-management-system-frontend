@@ -7,7 +7,7 @@
         <th scope="col">#</th>
         <th scope="col">Employee Name</th>
         <th scope="col">Birthdate</th>
-        <th scope="col">Role</th>
+        <th scope="col">Telephone No</th>
         <th scope="col">Job Title</th>
         <th scope="col">Start Date</th>
         <th scope="col">More</th>
@@ -18,7 +18,7 @@
         <td>{{ i + 1 }}</td>
         <td>{{employee.fullName}} </td>
         <td>{{employee.dob.split('T')[0]}}</td>
-        <td>{{employee.roles}} </td>
+        <td>{{employee.telephoneNo}} </td>
         <td>{{employee.jobTitle}}</td>
         <td>{{employee.startDate.split('T')[0]}}</td>
         <td>
@@ -26,7 +26,7 @@
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" #viewModal (click)="openModal(i)">View</button>
                     <button type="button" class="btn btn-outline-success" (click)="editEmployeeDetails(employee)">Edit</button>
-                    <button type="button" class="btn btn-outline-danger" (click)="deleteEmployeeDetails()">Delete</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="deleteEmployeeDetails(employee.username)">Delete</button>
                 </div>
             </div>
         </td>
@@ -46,7 +46,7 @@
             <p><b> Name: </b> {{allEmployeeData[currentIndex].fullName}}</p>
             <p><b> Employee Id: </b>{{allEmployeeData[currentIndex].empId}}</p>
             <p><b> Birthdate: </b>{{allEmployeeData[currentIndex].dob.split('T')[0]}}</p>
-            <p><b> Role: </b> {{allEmployeeData[currentIndex].roles}}</p>
+            <p><b> Telephone: </b> {{allEmployeeData[currentIndex].telephoneNo}}</p>
             <p><b> Email: </b>{{allEmployeeData[currentIndex].email}}</p>
             <p><b> Education: </b>{{allEmployeeData[currentIndex].education}}</p>
             <p><b> Job Title: </b>{{allEmployeeData[currentIndex].jobTitle}}</p>
@@ -54,7 +54,6 @@
             <p><b> Salary: </b>{{allEmployeeData[currentIndex].salary}}</p>
             <p><b> Leave Allowance: </b>{{allEmployeeData[currentIndex].leaveAllowance}}</p>
             <p><b> Leave Balance: </b>{{allEmployeeData[currentIndex].leaveBalance}}</p>
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>

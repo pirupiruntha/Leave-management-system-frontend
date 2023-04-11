@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { EmployeeServiceService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/model/employee';
-import { StorageService } from 'src/app/services/storage.service';
 import { Modal } from 'bootstrap';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-details',
@@ -12,7 +11,9 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class EmployeeDetailsComponent {
 
-    allEmployeeData: Employee[] = [];
+  allEmployeeData: Employee[] = [];
+  username: string ='';
+  currentIndex: number =0;
 
     fullName?: string;
     dob?: string;
@@ -23,34 +24,40 @@ export class EmployeeDetailsComponent {
     salary?: string;
     roles?: string[] = [];
 
-    constructor(private employeeService :EmployeeServiceService, private route: Router ){}
+  constructor(private employeeService :EmployeeServiceService, private route: Router ){}
 
-    ngOnInit() :void{
-      this.getAllEmployees();
-    }
+  ngOnInit() :void{
+    this.getAllEmployees();
+  }
 
-    getAllEmployees(): void {
-      console.log("CALLING METHOD TO ADMIN EMPLOYEE DETAILS BOARD");
-      this.employeeService.getAllEmployees().subscribe((data)=>{
-        console.log("role =", this.roles)
-          this.allEmployeeData = data.filter(d=>d.roles?.includes('ROLE_USER'));
-          if(this)
-          console.log("data = ", data); 
+  getAllEmployees(): void {
+    this.employeeService.getAllEmployees().subscribe((data)=>{
+      this.allEmployeeData = data.filter(d=>d.roles?.includes('ROLE_USER'));
+    })
+    
+  }
 
-      })
-    }
+  
+  openModal(index: number) {
+    this.currentIndex = index;
+    const modal = document.getElementById('exampleModal');
+    const modalInstance = new Modal(modal!);
+    modalInstance.show();
+  }
 
-    currentIndex: number =0;
-    openModal(index: number) {
-      this.currentIndex = index;
-      const modal = document.getElementById('exampleModal');
-      const modalInstance = new Modal(modal!);
-      modalInstance.show();
-}
+  editEmployeeDetails(employee: Employee) {
+    this.route.navigate(['/addEmployee'], { queryParams: { employee: JSON.stringify(employee) } });
+  }
 
-editEmployeeDetails(employee: Employee) {
-  this.route.navigate(['/addEmployee'], { queryParams: { employee: JSON.stringify(employee) } });
-}
-    deleteEmployeeDetails(){}
-
+  deleteEmployeeDetails(username: string){
+    this.employeeService.deleteEmployeeByUsername(username).subscribe(()=> {
+      alert('Employee deleted successfully!');
+      window.location.reload();
+      
+      },
+  (error) => {
+    console.error(error);  
+    })
+  }
+   
 }
