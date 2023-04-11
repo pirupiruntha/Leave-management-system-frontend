@@ -1,45 +1,81 @@
+<app-admin-navbar></app-admin-navbar>
 <h2 class="ms-5 text-success text-center mt-3 mb-3">Employee Leave Requests</h2>
-<table class="table">
+<table class="table mb-3">
     <thead>
       <tr class="table-dark">
         <th scope="col">#</th>
         <th scope="col">Employee Name</th>
-        <th scope="col">Leave Type</th>
         <th scope="col">Start Date</th>
         <th scope="col">End Date</th>
-        <th scope="col">Request Id</th>
-        <th scope="col">No of Leaves</th>
+        <th scope="col">Type</th>
         <th scope="col">Reason</th>
         <th scope="col">Status</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Mark</td>
+      <tr *ngFor="let leaveRequest of allLeaveRequests; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{leaveRequest.empUsername}}</td>
+        <td>{{leaveRequest.startDate}}</td>
+        <td>{{leaveRequest.endDate}} </td>
+        <td>{{leaveRequest.halfDay ? "Half Day" : "Full Day"}} </td>
+        <td>{{leaveRequest.reason}}</td>
         <td>
-            <select class="form-select" aria-label="Floating label select example">
-                <option value="1">Approve</option>
-                <option value="2">Reject</option>
-            </select>
+          <div class="justify-content-center align-items-center">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-success" (click)="approveLeave(leaveRequest.id!)">Approve</button>
+                <button type="button" class="btn btn-outline-danger" (click)="rejectLeave(leaveRequest.id!)">Reject</button>
+            </div>
+        </div>
         </td>
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
+    </tbody>
+  </table>
+
+  <h2 class="ms-5 text-success text-center mt-3 mb-3"> Approved Leave Requests</h2>
+<table class="table mb-3">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">Employee Name</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Type</th>
+        <th scope="col">Reason</th>
       </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leaveRequest of approvedLeaveRequests; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{leaveRequest.empUsername}}</td>
+        <td>{{leaveRequest.startDate}}</td>
+        <td>{{leaveRequest.endDate}} </td>
+        <td>{{leaveRequest.halfDay ? "Half Day" : "Full Day"}} </td>
+        <td>{{leaveRequest.reason}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="ms-5 text-success text-center mt-3 mb-3">Rejected Leave Requests</h2>
+  <table class="table mb-3">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">Employee Name</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Type</th>
+        <th scope="col">Reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leaveRequest of rejectedLeaveRequests; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{leaveRequest.empUsername}}</td>
+        <td>{{leaveRequest.startDate}}</td>
+        <td>{{leaveRequest.endDate}} </td>
+        <td>{{leaveRequest.halfDay ? "Half Day" : "Full Day"}} </td>
+        <td>{{leaveRequest.reason}}</td>
       </tr>
     </tbody>
   </table>

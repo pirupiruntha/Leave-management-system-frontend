@@ -42,20 +42,25 @@ export class LoginComponent implements OnInit{
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.storageService.getUser().roles;
-        console.log("roles", this.roles[0])
+
+        localStorage.setItem("USERNAME", username);
 
         if (this.roles[0]==="ROLE_ADMIN"){
-          this.route.navigate(['/admin-navbar']);
+          this.route.navigate(['/adminDashboard']);
         } else {
-          this.route.navigate(['/home'])
+          this.route.navigate(['/userDashboard'])
         }
           
       },
       error: err => {
-        this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
     });
+  }
+
+  logout(){
+    this.route.navigate(['/login']);
+    this.storageService.clean();
   }
   
 }

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
-
+import { JwtModule } from '@auth0/angular-jwt';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,13 +16,14 @@ import { MyLeaveComponent } from './components/my-leave/my-leave.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { LeaveRequestsComponent } from './components/leave-requests/leave-requests.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
 }
-
 
 @NgModule({
   declarations: [
@@ -35,14 +36,17 @@ export function tokenGetter() {
     EmployeeDetailsComponent,
     LeaveRequestsComponent,
     AddEmployeeComponent,
-    ProfileComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    FooterComponent,
+    AdminDashboardComponent,
+    UserDashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {
