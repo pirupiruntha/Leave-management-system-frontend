@@ -7,6 +7,8 @@ import { EmployeeServiceService } from 'src/app/services/employee.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+    userData: any; 
+
     fullName?: string;
     dob?: string;
     gender?: string;
@@ -21,20 +23,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = localStorage.getItem("USERNAME") || ""
-    console.log(this.username)
     this.getEmployeeDataByUsername(this.username);
   }
 
   getEmployeeDataByUsername(username: string): void { 
     console.log("CALLING METHOD TO USER")
     this.employeeService.getEmployeeDataByUsername(this.username).subscribe((data)=>{
-      console.log("data = ", data);
       this.fullName = data.fullName;
-      this.dob = data.dob;
+      this.dob = data.dob.split('T')[0];
       this.gender = data.gender;
       this.education = data.education;
       this.jobTitle = data.jobTitle;
-      this.startDate = data.startDate;
+      this.startDate = data.startDate.split('T')[0];
       this.salary = data.salary;
     })
   }

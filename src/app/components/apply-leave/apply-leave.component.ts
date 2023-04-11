@@ -22,14 +22,11 @@ export class ApplyLeaveComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = localStorage.getItem("USERNAME") || "";
-    console.log(this.username)
-
   }
 
   errorMessage: string ='';
 
   onSubmit(){
-    console.log("apply")
     if (this.leaveForm.invalid) {
       this.errorMessage = "Please fill out all required fields.";
       return;
@@ -37,8 +34,7 @@ export class ApplyLeaveComponent implements OnInit {
   
     const leaveRequest: LeaveRequest = this.leaveForm.value as LeaveRequest;
     this.employeeService.applyLeave(this.username, leaveRequest).subscribe(
-      (response) => {
-        console.log("res = ", response);
+      () => {
         alert("leave applied successfully!");
         this.leaveForm.reset();
         // this.router.navigate(['/myLeave']);
