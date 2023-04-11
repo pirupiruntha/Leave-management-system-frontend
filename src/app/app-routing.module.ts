@@ -6,21 +6,20 @@ import { EmployeeDetailsComponent } from './components/employee-details/employee
 import { LeaveRequestsComponent } from './components/leave-requests/leave-requests.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyLeaveComponent } from './components/my-leave/my-leave.component';
-import { NavbarComponent } from './components/user-navbar/navbar.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {path:"", component:LoginComponent},
-  {path:"user-navbar", component:NavbarComponent},
-  {path:"userDashboard", component:UserDashboardComponent},
-  {path:"applyLeave", component:ApplyLeaveComponent},
-  {path:"myLeave", component:MyLeaveComponent},
-  {path:"addEmployee", component:AddEmployeeComponent},
-  {path:"employeedetails", component:EmployeeDetailsComponent},
-  {path:"leaveRequests", component:LeaveRequestsComponent},
-  {path:"adminDashboard", component:AdminDashboardComponent},
-  {path:"home", component:UserDashboardComponent}
+  {path:"userDashboard", component:UserDashboardComponent, canActivate: [AuthGuardService]}, 
+  {path:"adminDashboard", component:AdminDashboardComponent, canActivate: [AuthGuardService]},
+  {path:"applyLeave", component:ApplyLeaveComponent, canActivate: [AuthGuardService]},
+  {path:"myLeave", component:MyLeaveComponent, canActivate: [AuthGuardService]},
+  {path:"addEmployee", component:AddEmployeeComponent, canActivate: [AuthGuardService]},
+  {path:"employeedetails", component:EmployeeDetailsComponent, canActivate: [AuthGuardService]},
+  {path:"leaveRequests", component:LeaveRequestsComponent, canActivate: [AuthGuardService]},
+  {path:"home", component:UserDashboardComponent, canActivate: [AuthGuardService]}
   
 ];
 
