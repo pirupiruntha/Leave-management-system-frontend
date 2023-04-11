@@ -16,7 +16,6 @@ import { MyLeaveComponent } from './components/my-leave/my-leave.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { LeaveRequestsComponent } from './components/leave-requests/leave-requests.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
@@ -37,7 +36,6 @@ export function tokenGetter() {
     EmployeeDetailsComponent,
     LeaveRequestsComponent,
     AddEmployeeComponent,
-    ProfileComponent,
     AdminNavbarComponent,
     FooterComponent,
     AdminDashboardComponent,
