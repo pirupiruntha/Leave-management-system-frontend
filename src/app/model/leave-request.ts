@@ -1,6 +1,10 @@
 export interface LeaveRequest {
-    startDate: Date;
-    endDate: Date;
+    empUsername?: string;
+    id?: string;
+    startDate?: Date;
+    endDate?: Date;
     halfDay?: boolean;
-    reason: string;
+    reason?: string;
+    status?: string;
+
 }
