@@ -23,7 +23,6 @@ export class AddEmployeeComponent implements OnInit {
         this.showText=true;
       }
     });
-    console.log("edit", this.existingEmployee)
   }
 
   employeeForm = new FormGroup({
@@ -54,8 +53,7 @@ export class AddEmployeeComponent implements OnInit {
     const employee: Employee = this.employeeForm.value as Employee;
     if(this.showText){
       this.employeeService.updateEmployee(this.existingEmployee.username, employee).subscribe(
-        (response) => {
-          console.log("res = ", response);
+        () => {
           alert("Employee update successfully!");
           this.successMessage = "Employee update successfully!";
           this.employeeForm.reset();
@@ -68,8 +66,7 @@ export class AddEmployeeComponent implements OnInit {
       );
     }else{
       this.employeeService.addEmployee(employee).subscribe(
-        (response) => {
-          console.log("res = ", response);
+        () => {
           alert("Employee added successfully!");
           this.successMessage = "Employee added successfully!";
           this.employeeForm.reset();
