@@ -1,7 +1,7 @@
 <app-admin-navbar></app-admin-navbar>
 <div class="container-sm">
-    <h3 class="text-success text-center fs-2 text mt-3" *ngIf="!showText">Add Employee Form</h3>
-    <h3 class="text-success text-center fs-2 text mt-3" *ngIf="showText">Update Employee Form</h3>
+    <h3 class="text-success text-center fs-2 text mt-3" *ngIf="!isUpdate">Add Employee Form</h3>
+    <h3 class="text-success text-center fs-2 text mt-3" *ngIf="isUpdate">Update Employee Form</h3>
 
 
     <form class="ms-5 me-5 p-5" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
@@ -31,7 +31,7 @@
         <div class="mb-3 row">
             <label for="inputStartDate" class="col-sm-2 col-form-label">Birth Date</label>
             <div class="col-sm-10">
-            <input type="date" class="form-control" id="inputStartDate" formControlName="dob" [(ngModel)]="existingEmployee.dob">
+            <input type="date" class="form-control" id="inputStartDate" formControlName="dob" [(ngModel)]="existingEmployee.dob ">
             </div>
         </div>
 
@@ -46,14 +46,14 @@
             </div>   
         </div>
 
-        <div class="mb-3 row" *ngIf="!showText">
+        <div class="mb-3 row" *ngIf="!isUpdate">
             <label for="floatingInputUsername" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="floatingInputUsername" formControlName="username" [(ngModel)]="existingEmployee.username"/>
             </div>   
         </div>
 
-        <div class="mb-3 row" *ngIf="!showText">
+        <div class="mb-3 row" *ngIf="!isUpdate">
             <label for="floatingInputPassword" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="floatingInputPassword" formControlName="password" [(ngModel)]="existingEmployee.password"/>

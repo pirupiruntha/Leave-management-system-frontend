@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Employee } from 'src/app/model/employee';
 import { EmployeeServiceService } from 'src/app/services/employee.service';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-employee',
@@ -11,16 +11,15 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router'
 })
 export class AddEmployeeComponent implements OnInit {
   existingEmployee: any ={};
-  showText= false;
+  isUpdate = false;
 
   constructor(private employeeService: EmployeeServiceService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log("initialize");
     this.route.queryParams.subscribe(params => {
       if (params['employee']) {
         this.existingEmployee = JSON.parse(params['employee']);
-        this.showText=true;
+        this.isUpdate=true;
       }
     });
   }
@@ -51,7 +50,7 @@ export class AddEmployeeComponent implements OnInit {
     }
   
     const employee: Employee = this.employeeForm.value as Employee;
-    if(this.showText){
+    if(this.isUpdate){
       this.employeeService.updateEmployee(this.existingEmployee.username, employee).subscribe(
         () => {
           alert("Employee update successfully!");
