@@ -7,7 +7,7 @@
     <form class="ms-5 me-5 p-5" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
 
         <div class="mb-3 row">
-            <label for="floatingInputName" class="col-sm-2 col-form-label">Full Name</label>
+            <label for="floatingInputName" class="col-sm-2 col-form-label">Full Name *</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="floatingInputName" formControlName="fullName" [(ngModel)]="existingEmployee.fullName"
                 />
@@ -15,9 +15,10 @@
         </div>
 
         <div class="mb-3 row">
-            <label for="floatingInputEmpId" class="col-sm-2 col-form-label">Employee Id</label>
+            <label for="floatingInputEmpId" class="col-sm-2 col-form-label">Employee Id *</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="floatingInputEmpId" formControlName="empId" [(ngModel)]="existingEmployee.empId"/>
+                <input type="text" class="form-control" id="floatingInputEmpId" formControlName="empId" 
+                [(ngModel)]="existingEmployee.empId" [readonly]="isUpdate" required="empId"/>
             </div>   
         </div>
 
@@ -40,30 +41,41 @@
             <div class="col-sm-10">
                 <select class="form-select" id="floatingSelect" aria-label="Floating label select example" formControlName="gender" [(ngModel)]="existingEmployee.gender">
                     <option selected>Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
                 </select>
             </div>   
         </div>
 
         <div class="mb-3 row" *ngIf="!isUpdate">
-            <label for="floatingInputUsername" class="col-sm-2 col-form-label">Username</label>
+            <label for="floatingInputUsername" class="col-sm-2 col-form-label">Username *</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="floatingInputUsername" formControlName="username" [(ngModel)]="existingEmployee.username"/>
+                <input type="text" class="form-control" id="floatingInputUsername" formControlName="username" 
+                [(ngModel)]="existingEmployee.username" required="username"/>
             </div>   
         </div>
 
         <div class="mb-3 row" *ngIf="!isUpdate">
-            <label for="floatingInputPassword" class="col-sm-2 col-form-label">Password</label>
+            <label for="floatingInputPassword" class="col-sm-2 col-form-label">Password *</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="floatingInputPassword" formControlName="password" [(ngModel)]="existingEmployee.password"/>
+                <input type="text" class="form-control" id="floatingInputPassword" formControlName="password"
+                required="password"/>
+            </div>   
+        </div>
+
+        <div class="mb-3 row" *ngIf="!isUpdate">
+            <label for="floatingInputConfirmPassword" class="col-sm-2 col-form-label">ConfirmPassword *</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="floatingInputConfirmPassword" 
+                formControlName="confirmPassword" required="confirmPassword"/>
             </div>   
         </div>
 
         <div class="mb-3 row">
             <label for="floatingInputTeleNo" class="col-sm-2 col-form-label">Telephone No</label>
             <div class="col-sm-10">
-                <input type="tel" class="form-control" id="floatingInputTeleNo" formControlName="telephoneNo" [(ngModel)]="existingEmployee.telephoneNo"/>
+                <input type="tel" class="form-control" id="floatingInputTeleNo" formControlName="telephoneNo" 
+                [(ngModel)]="existingEmployee.telephoneNo"/>
             </div>   
         </div>
 
@@ -91,8 +103,16 @@
         <div class="mb-3 row">
             <label for="floatingInputJobTitle" class="col-sm-2 col-form-label">Job Title</label>
             <div class="col-sm-10">
-                <input type="text"  class="form-control"  id="floatingInputJobTitle" formControlName="jobTitle" [(ngModel)]="existingEmployee.jobTitle"/>
-            </div>
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" formControlName="jobTitle" [(ngModel)]="existingEmployee.jobTitle">
+                    <option selected>Select Job Title </option>
+                    <option value="PROJECT_MANAGER"> Project Manager</option>
+                    <option value="TECH_LEAD">Tech Lead </option>
+                    <option value="SENIOR_SOFTWARE_ENGINEER"> Senior Software Engineer</option>
+                    <option value="SOFTWARE_ENGINEER">Software Engineer</option>
+                    <option value="ASSOCIATE_SOFTWARE_ENGINEER"> Associate software Engineer</option>
+                    <option value="TRAINEE_SOFTWARE_ENGINEER">Trainee Software Engineer</option>
+                </select>
+            </div>  
         </div>
 
         <div class="mb-3 row">
