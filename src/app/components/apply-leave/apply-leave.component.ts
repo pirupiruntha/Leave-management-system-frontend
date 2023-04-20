@@ -37,7 +37,7 @@ export class ApplyLeaveComponent implements OnInit {
       () => {
         alert("leave applied successfully!");
         this.leaveForm.reset();
-        // this.router.navigate(['/myLeave']);
+        this.router.navigate(['/myLeave']);
       },
       (error) => {
         console.error(error);
