@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   }
 
   getEmployeeDataByUsername(username: string): void { 
-    console.log("CALLING METHOD TO USER")
     this.employeeService.getEmployeeDataByUsername(this.username).subscribe((data)=>{
       this.fullName = data.fullName;
       this.dob = data.dob.split('T')[0];
