@@ -21,6 +21,7 @@
         <th scope="col">#</th>
         <th scope="col">Start Date</th>
         <th scope="col">End Date</th>
+        <th scope="col">Type</th>
         <th scope="col">Reason</th>
         <th scope="col">Status</th>
       </tr>
@@ -30,6 +31,7 @@
         <th scope="row">{{i+1}}</th>
         <td>{{leave.startDate}}</td>
         <td>{{leave.endDate}}</td>
+        <td>{{leave.halfDay ? "Half Day" : "Full Day"}}</td>
         <td>{{leave.reason}}</td>
         <td>{{leave.status}}</td>
       </tr>

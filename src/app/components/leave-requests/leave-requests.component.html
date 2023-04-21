@@ -4,7 +4,8 @@
     <thead>
       <tr class="table-dark">
         <th scope="col">#</th>
-        <th scope="col">Employee Name</th>
+        <th scope="col">Employee Full Name</th>
+        <th scope="col">Employee Id</th>
         <th scope="col">Start Date</th>
         <th scope="col">End Date</th>
         <th scope="col">Type</th>
@@ -16,6 +17,7 @@
       <tr *ngFor="let leaveRequest of allLeaveRequests; let i = index">
         <th scope="row">{{i + 1}}</th>
         <td>{{leaveRequest.empUsername}}</td>
+        <td>{{leaveRequest.empId}}</td>
         <td>{{leaveRequest.startDate}}</td>
         <td>{{leaveRequest.endDate}} </td>
         <td>{{leaveRequest.halfDay ? "Half Day" : "Full Day"}} </td>

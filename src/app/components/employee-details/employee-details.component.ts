@@ -50,14 +50,14 @@ export class EmployeeDetailsComponent {
   }
 
   deleteEmployeeDetails(username: string){
-    this.employeeService.deleteEmployeeByUsername(username).subscribe(()=> {
-      alert('Employee deleted successfully!');
-      window.location.reload();
-      
-      },
-  (error) => {
-    console.error(error);  
-    })
+    if (confirm('Are you sure you want to delete this employee?')) {
+      this.employeeService.deleteEmployeeByUsername(username).subscribe(()=> {
+          alert('Employee deleted successfully!');
+          window.location.reload();
+      }, (error) => {
+          console.error(error);  
+      });
+    }
   }
-   
+
 }

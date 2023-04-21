@@ -19,6 +19,7 @@ export class LeaveRequestsComponent implements OnInit {
   leaveId: string = '';
 
   empUsername?: string;
+  empId?: string;
   id?: string;
   startDate?: string;
   endDate?: string;
@@ -33,16 +34,16 @@ export class LeaveRequestsComponent implements OnInit {
 
   getAllLeaves(): void {
     this.employeeService.getAllLeaves().subscribe(data => {
-      this.allLeaveRequests = data.filter(d => d.status === "Pending");
-      this.approvedLeaveRequests = data.filter(d => d.status === "approved");
-      this.rejectedLeaveRequests = data.filter(d => d.status === "rejected");
+      this.allLeaveRequests = data.filter(d => d.status === "PENDING");
+      this.approvedLeaveRequests = data.filter(d => d.status === "APPROVED");
+      this.rejectedLeaveRequests = data.filter(d => d.status === "REJECTED");
     });
   }
 
   updateLeaveRequest!: UpdateLeaveRequest;
 
   approveLeave(id: string){
-    this.updateLeaveRequest = {leaveId: id, status: "approved"}
+    this.updateLeaveRequest = {leaveId: id, status: "APPROVED"}
     this.employeeService.updateLeave(this.updateLeaveRequest).subscribe((data)=>{
       alert("leave approved");
       window.location.reload();
@@ -50,7 +51,7 @@ export class LeaveRequestsComponent implements OnInit {
   }
 
   rejectLeave(id: string){
-    this.updateLeaveRequest = {leaveId: id, status: "rejected"}
+    this.updateLeaveRequest = {leaveId: id, status: "REJECTED"}
     this.employeeService.updateLeave(this.updateLeaveRequest).subscribe((data)=>{
       alert("leave rejected");
       window.location.reload();
