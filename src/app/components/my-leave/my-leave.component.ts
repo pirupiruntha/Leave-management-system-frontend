@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LeaveRequest } from 'src/app/model/leave-request';
 import { EmployeeServiceService } from 'src/app/services/employee.service';
 
 @Component({
@@ -13,8 +12,9 @@ export class MyLeaveComponent implements OnInit {
   leaveAllowance ?: string;
   leaveBalance ?: string;
   id?: string;
-  startDate ?: Date;
+  startDate ?: string;
   endDate?: string;
+  type?: string;
   reason?: string;
   status?: string;
 
