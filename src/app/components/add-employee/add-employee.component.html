@@ -70,6 +70,8 @@
                 formControlName="confirmPassword" required="confirmPassword"/>
             </div>   
         </div>
+        
+        <span class="text-danger" *ngIf="employeeForm.errors?.['passwordMatchError']">Password does not match</span>
 
         <div class="mb-3 row">
             <label for="floatingInputTeleNo" class="col-sm-2 col-form-label">Telephone No</label>

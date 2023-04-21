@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Employee } from 'src/app/model/employee';
 import { EmployeeServiceService } from 'src/app/services/employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { matchPassword } from 'src/app/validators/matchPasswordValidator';
 
 @Component({
   selector: 'app-add-employee',
@@ -13,8 +14,37 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddEmployeeComponent implements OnInit {
   existingEmployee: any = {};
   isUpdate = false;
+  employeeForm: FormGroup ;
 
-  constructor(private employeeService: EmployeeServiceService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private employeeService: EmployeeServiceService,
+    private router: Router, 
+    private route: ActivatedRoute)
+     {
+      this.employeeForm = new FormGroup({
+        fullName: new FormControl(''),
+        empId: new FormControl('', Validators.maxLength(10)),
+        email: new FormControl('', Validators.email),
+        dob: new FormControl(''),
+        gender: new FormControl(''),
+        username: new FormControl('', Validators.compose([
+          Validators.minLength(4),
+          Validators.maxLength(10)])),
+        password: new FormControl('', Validators.compose([
+          Validators.minLength(6),
+          Validators.maxLength(10)])),
+        confirmPassword: new FormControl(''),
+        telephoneNo: new FormControl('', Validators.compose([
+          Validators.minLength(10),
+          Validators.maxLength(12)])),
+        startDate: new FormControl(''),
+        leaveAllowance: new FormControl('', Validators.compose([Validators.max(21), Validators.min(6)])),
+        education: new FormControl(''),
+        jobTitle: new FormControl(''),
+        salary: new FormControl('')
+      }, {validators: matchPassword});
+
+     }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -24,32 +54,6 @@ export class AddEmployeeComponent implements OnInit {
       }
     });
   }
-
-  employeeForm = new FormGroup({
-    fullName: new FormControl(''),
-    empId: new FormControl('', Validators.maxLength(10)),
-    email: new FormControl('', Validators.email),
-    dob: new FormControl(''),
-    gender: new FormControl(''),
-    username: new FormControl('', Validators.compose([
-      Validators.minLength(4),
-      Validators.maxLength(10)])),
-    password: new FormControl('', Validators.compose([
-      Validators.minLength(6),
-      Validators.maxLength(10)])),
-    confirmPassword: new FormControl('', Validators.compose([
-      Validators.minLength(6),
-      Validators.maxLength(10)])),
-    telephoneNo: new FormControl('', Validators.compose([
-      Validators.minLength(10),
-      Validators.maxLength(12)])),
-    startDate: new FormControl(''),
-    leaveAllowance: new FormControl('', Validators.compose([Validators.max(21), Validators.min(6)])),
-    education: new FormControl(''),
-    jobTitle: new FormControl(''),
-    salary: new FormControl('')
-  });
-
 
   errorMessage: string = '';
   successMessage: string = '';
