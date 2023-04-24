@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Employee } from '../model/employee';
 import { Observable } from 'rxjs';
-import { StorageService } from './storage.service';
 import { LeaveRequest } from '../model/leave-request';
 import { DeleteResponse } from '../model/deleteResponse';
 import { UpdateLeaveRequest } from '../model/updateLeaveRequest';
 import { environment } from '../../environments/environment';
-
 
 @Injectable({
   providedIn: 'root'
@@ -18,56 +16,42 @@ export class EmployeeServiceService  {
   ngOnInit(): void {
   }
   
-  constructor(private http: HttpClient, private storageService: StorageService) { }
-
-  private getAuthTokenHeader(): HttpHeaders {
-    const token = this.storageService.getUser().token;
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);  
-  }
+  constructor(private http: HttpClient) { }
 
   addEmployee(employee: Employee): Observable<Employee> {
-    const headers = this.getAuthTokenHeader();
-    return this.http.post<Employee>(`${environment.backendUrl}employees`, employee, { headers });
+    return this.http.post<Employee>(`${environment.backendUrl}employees`, employee);
   }
 
   updateEmployee(username:string, employee: Employee): Observable<Employee> {
-    const headers = this.getAuthTokenHeader();
-    return this.http.put<Employee>(`${environment.backendUrl}employees/${username}`, employee, { headers });
+    return this.http.put<Employee>(`${environment.backendUrl}employees/${username}`, employee);
   }
 
   updateLeave(updateLeaveRequest: UpdateLeaveRequest): Observable<LeaveRequest> {
-    const headers = this.getAuthTokenHeader();
-    return this.http.put<LeaveRequest>(`${environment.backendUrl}employee/leave`, updateLeaveRequest, { headers });
+    return this.http.put<LeaveRequest>(`${environment.backendUrl}employee/leave`, updateLeaveRequest);
   }
 
   applyLeave(username: string, leaveRequest: LeaveRequest): Observable<LeaveRequest> {
-    const headers = this.getAuthTokenHeader();
-    return this.http.post<LeaveRequest>(`${environment.backendUrl}employee/leave/${username}`, leaveRequest, { headers });
+    return this.http.post<LeaveRequest>(`${environment.backendUrl}employee/leave/${username}`, leaveRequest);
   }
 
   getAllEmployees(): Observable<Employee[]> {
-    const headers = this.getAuthTokenHeader();
-    return this.http.get<Employee[]>(`${environment.backendUrl}employees`, { headers }); 
+    return this.http.get<Employee[]>(`${environment.backendUrl}employees`); 
   }
 
   getAllLeaves(): Observable<LeaveRequest[]> {
-    const headers = this.getAuthTokenHeader();
-    return this.http.get<LeaveRequest[]>(`${environment.backendUrl}employee/leaves`, { headers }); 
+    return this.http.get<LeaveRequest[]>(`${environment.backendUrl}employee/leaves`); 
   }
 
   getEmployeeDataByUsername(username: string): Observable<Employee> {
-    const headers = this.getAuthTokenHeader();
-    return this.http.get<Employee>(`${environment.backendUrl}employees/${username}`, { headers });
+    return this.http.get<Employee>(`${environment.backendUrl}employees/${username}`);
   }
 
   getLeaveRequestByUsername(username: string): Observable<LeaveRequest> {
-    const headers = this.getAuthTokenHeader();
-    return this.http.get<LeaveRequest>(`${environment.backendUrl}employee/leave/${username}`, { headers });
+    return this.http.get<LeaveRequest>(`${environment.backendUrl}employee/leave/${username}`);
   }
 
   deleteEmployeeByUsername(username: string): Observable<DeleteResponse> {
-    const headers = this.getAuthTokenHeader();
-    return this.http.delete<DeleteResponse>(`${environment.backendUrl}employees/${username}`, { headers });
+    return this.http.delete<DeleteResponse>(`${environment.backendUrl}employees/${username}`);
   }
   
 }
