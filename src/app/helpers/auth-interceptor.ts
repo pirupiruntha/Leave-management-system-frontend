@@ -1,56 +1,27 @@
 import {
-    HttpErrorResponse,
-  HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/storage.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService,
-    private router:Router) {}
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    if (req.headers.get('No-Auth') === 'True') {
-      return next.handle(req.clone());
+  constructor(private storageService: StorageService) {}
+  
+  intercept(request: HttpRequest<any>, next: HttpHandler) {
+    const token = this.storageService.getUser().token;
+
+    if (token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
     }
 
-    const token = this.authService.getToken();
-
-    req = this.addToken(req, token);
-
-    return next.handle(req).pipe(
-        catchError(
-            (err:HttpErrorResponse) => {
-                console.log(err.status);
-                if(err.status === 401) {
-                    this.router.navigate(['/login']);
-                } else if(err.status === 403) {
-                    this.router.navigate(['/forbidden']);
-                }
-                return throwError("Some thing is wrong");
-            }
-        )
-    );
-  }
-
-
-  private addToken(request:HttpRequest<any>, token:string) {
-      return request.clone(
-          {
-              setHeaders: {
-                  Authorization : `Bearer ${token}`
-              }
-          }
-      );
+    return next.handle(request);
   }
 }
