@@ -36,9 +36,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ![image](https://user-images.githubusercontent.com/37388708/234807363-1237b507-a9d3-462b-9a60-f80c3f33e5b8.png)
 ![image](https://user-images.githubusercontent.com/37388708/234807528-9184ea91-6ebd-4cb5-a312-dacd7901b326.png)
 
-### Edit Employee Form Page
-![image](https://user-images.githubusercontent.com/37388708/234807811-40cbeabc-0a1a-4a16-876a-19436a7aeac3.png)
-
 ### All Leave Requests page
 ![image](https://user-images.githubusercontent.com/37388708/234811037-ac4ca613-c0b6-4b86-9214-d8eb8f11135c.png)
 
