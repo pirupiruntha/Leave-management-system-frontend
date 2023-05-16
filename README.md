@@ -29,9 +29,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ###Login page
 ![image](https://user-images.githubusercontent.com/37388708/234805456-76b7e3f1-fa61-49da-bde4-d2b61e463906.png)
 
-###Admin page
-![image](https://user-images.githubusercontent.com/37388708/234805978-53b57f24-ccdf-474f-b223-9d48b897cae5.png)
-
 ### All employee details page
 ![image](https://user-images.githubusercontent.com/37388708/234806323-c669338a-7a2c-44cf-b2a3-a71577609e6f.png)
 
